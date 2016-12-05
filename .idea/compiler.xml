@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="game-center" />
         <module name="gameserver" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="game-center" target="1.8" />
       <module name="gameserver" target="1.8" />
     </bytecodeTargetLevel>
   </component>
