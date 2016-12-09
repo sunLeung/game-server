@@ -1,5 +1,6 @@
 package common.boot;
 
+import common.net.SocketServer;
 import game.song.SongService;
 import common.config.Config;
 import common.config.LinuxPrinter;
@@ -30,9 +31,10 @@ public class GameServer {
 				System.setErr(pl);
 				new Thread(pl).start();
 			}
-			init();
-			HttpServer.startHttpServer(4000);
-			AdminServer.startAdminServer(4001);
+//			init();
+			HttpServer.startHttpServer(9000);
+			AdminServer.startAdminServer(9001);
+			SocketServer.startSocketServer(9002);
 			logger.info("GameServer started.Use seconds "+ (System.currentTimeMillis()-s)/1000);
 		} catch (Exception e) {
 			e.printStackTrace();

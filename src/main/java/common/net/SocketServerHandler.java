@@ -4,6 +4,7 @@ import common.utils.Def;
 import common.utils.HttpRespUtils;
 import common.utils.StringUtils;
 import game.player.PlayerService;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -20,36 +21,11 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 public class SocketServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg){
-		if(msg instanceof  HttpPacket){
-			HttpPacket packet=(HttpPacket)msg;
-			if(StringUtils.isBlank(packet.getDeviceid())){
-				HttpRespUtils.responseFail(ctx, Def.CODE_LOGIN_FAIL,"Deviceid must not be null.");
-				return;
-			}
-			int protocol=packet.getProtocol();
-			if(protocol>=0x0a){
-				//验证玩家是否已经登录
-				if(StringUtils.isBlank(packet.getToken())||!PlayerService.authPlayer(packet.getPlayerid(), packet.getDeviceid(), packet.getToken())){
-					HttpRespUtils.responseFail(ctx, Def.CODE_LOGIN_FAIL,"Verify login authentication fail,please login again.");
-					return;
-				}
-			}
-			
-			HttpAction action=HttpProtocolContent.httpProtocolContent.get(protocol);
-			if(action!=null){
-				HttpAction clone=action.clone();
-				String result=clone.handle(packet);
-				if(result==null)result="";
-				FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
-						HttpResponseStatus.OK, Unpooled.copiedBuffer(result, CharsetUtil.UTF_8));
-				response.headers().set(CONTENT_TYPE, "application/json;charset=UTF-8");
-				response.headers().set(HttpHeaderNames.CONNECTION, "close");
-				response.headers().set(HttpHeaderNames.CONTENT_LENGTH, result.getBytes().length);
-				ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
-				return;
-			}
-		}
-		HttpRespUtils.responseFail(ctx, Def.CODE_ROUTE_FAIL,"Protocal not found.");
+		ByteBuf bb = (ByteBuf) msg;
+		int length = bb.readInt();
+		System.out.println(length);
+		int i = bb.readInt();
+		System.out.println(i);
 	}
 
 	@Override

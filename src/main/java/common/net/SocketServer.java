@@ -11,6 +11,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
@@ -33,6 +35,7 @@ public class SocketServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
+                            ch.pipeline().addLast("frame-decoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4));
                             ch.pipeline().addLast("work-handler", new SocketServerHandler());
                         }
                     })
@@ -41,13 +44,13 @@ public class SocketServer {
                     //TCP层面心跳
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             future = b.bind(port).sync();
-            logger.info("HTTP server started.Listening:" + port);
+            logger.info("Socket server started.Listening:" + port);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void stopHttpServer() {
+    public static void stopSocketServer() {
         try {
             if (future != null)
                 future.channel().closeFuture().sync();
