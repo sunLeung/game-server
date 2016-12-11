@@ -10,6 +10,9 @@ public class SocketClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ByteBuf bb = ctx.alloc().buffer(4);
         bb.writeInt(9091);
+        String abc="fuck";
+        bb.writeInt(abc.length());
+        bb.writeBytes(new String("abcka").getBytes());
         ctx.writeAndFlush(bb);
         ctx.fireChannelActive();
     }

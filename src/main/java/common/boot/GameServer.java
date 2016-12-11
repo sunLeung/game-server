@@ -22,20 +22,21 @@ public class GameServer {
 			long s = System.currentTimeMillis();
 			String os = System.getProperty("sun.desktop");
 			System.out.println("[System INFO] Running desktop is " + os);
-			if ("windows".equals(os)) {
-				System.setOut(new WindowsPrinter(System.out));
-				System.setErr(new WindowsPrinter(System.err));
-			} else {
-				LinuxPrinter pl = new LinuxPrinter(System.out);
-				System.setOut(pl);
-				System.setErr(pl);
-				new Thread(pl).start();
-			}
+//			if ("windows".equals(os)) {
+//				System.setOut(new WindowsPrinter(System.out));
+//				System.setErr(new WindowsPrinter(System.err));
+//			} else {
+//				LinuxPrinter pl = new LinuxPrinter(System.out);
+//				System.setOut(pl);
+//				System.setErr(pl);
+//				new Thread(pl).start();
+//			}
 //			init();
 			HttpServer.startHttpServer(9000);
 			AdminServer.startAdminServer(9001);
 			SocketServer.startSocketServer(9002);
-			logger.info("GameServer started.Use seconds "+ (System.currentTimeMillis()-s)/1000);
+			System.out.println("GameServer started.Use seconds " + (System.currentTimeMillis() - s) / 1000);
+//			logger.info("GameServer started.Use seconds " + (System.currentTimeMillis() - s) / 1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

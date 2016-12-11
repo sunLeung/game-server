@@ -26,6 +26,10 @@ public class SocketServerHandler extends ChannelInboundHandlerAdapter {
 		System.out.println(length);
 		int i = bb.readInt();
 		System.out.println(i);
+		int j = bb.readInt();
+		byte[] strb=new byte[j];
+		bb.readBytes(strb);
+		System.out.println(new String(strb));
 	}
 
 	@Override
