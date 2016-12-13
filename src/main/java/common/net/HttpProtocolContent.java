@@ -1,15 +1,15 @@
 package common.net;
 
+import common.utils.AnnoUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import common.log.Logger;
-import common.log.LoggerManger;
-import common.utils.AnnoUtils;
-
 public class HttpProtocolContent {
-	private static Logger log=LoggerManger.getLogger();
+	private static Logger log= LoggerFactory.getLogger(HttpProtocolContent.class.getName());
 	public static Map<Integer, HttpAction> httpProtocolContent = new ConcurrentHashMap<Integer, HttpAction>();
 	
 	public static void init() {

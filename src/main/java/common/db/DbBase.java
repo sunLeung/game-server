@@ -1,5 +1,12 @@
 package common.db;
 
+import com.mysql.jdbc.Statement;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.*;
+import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,19 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ColumnListHandler;
-import org.apache.commons.dbutils.handlers.MapListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
-import org.apache.commons.lang3.ArrayUtils;
-
-import common.db.Pojo;
-
-import com.mysql.jdbc.Statement;
-import common.log.Logger;
-import common.log.LoggerManger;
 /**
  * 
  * @Description 数据库操作工具类
@@ -30,7 +24,7 @@ import common.log.LoggerManger;
  */
 @SuppressWarnings({"unchecked","rawtypes"})
 public abstract class DbBase {
-	private static Logger log=LoggerManger.getLogger();
+	private static Logger log= LoggerFactory.getLogger(DbBase.class.getName());
 
 	protected QueryRunner runner = null;
 	private final static ColumnListHandler columnListHandler = new ColumnListHandler();

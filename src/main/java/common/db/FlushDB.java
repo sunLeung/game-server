@@ -1,16 +1,15 @@
 package common.db;
 
+import common.config.Config;
+import common.utils.TimerManagerUtils;
 import game.dao.PlayerDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
-import common.config.Config;
-import common.log.Logger;
-import common.log.LoggerManger;
-import common.utils.TimerManagerUtils;
-
 public class FlushDB {
-	private static Logger logger=LoggerManger.getLogger();
+	private static Logger logger= LoggerFactory.getLogger(FlushDB.class.getName());
 	public static void flush(){
 		logger.info("start flush db.");
 		PlayerDao.flushPlayer();

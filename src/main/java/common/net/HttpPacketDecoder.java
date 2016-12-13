@@ -1,22 +1,21 @@
 package common.net;
 
+import common.boot.GameServer;
+import common.utils.StringUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.List;
 import java.util.Set;
 
-import common.boot.GameServer;
-import common.log.Logger;
-import common.log.LoggerManger;
-import common.utils.StringUtils;
-
 public class HttpPacketDecoder extends MessageToMessageDecoder<FullHttpRequest> {
-	private static Logger logger=LoggerManger.getLogger();
+	private static Logger logger= LoggerFactory.getLogger(HttpPacketDecoder.class.getName());
 	@Override
 	protected void decode(ChannelHandlerContext ctx, FullHttpRequest msg, List<Object> out){
 		try {

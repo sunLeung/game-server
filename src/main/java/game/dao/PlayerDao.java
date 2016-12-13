@@ -1,20 +1,20 @@
 package game.dao;
 
-import static common.db.DbUtils.dbUtils;
 import game.player.Player;
 import game.player.PlayerBean;
 import game.player.PlayerCache;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import common.log.Logger;
-import common.log.LoggerManger;
+import static common.db.DbUtils.dbUtils;
 
 
 public class PlayerDao {
-	private static Logger log=LoggerManger.getLogger();
+	private static Logger log= LoggerFactory.getLogger(PlayerDao.class.getName());
 	
 	
 	public static int save(PlayerBean bean){

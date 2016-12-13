@@ -1,13 +1,10 @@
 package game.player;
 
+import common.utils.SecurityUtils;
 import game.dao.PlayerDao;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import common.log.LoggerManger;
-import common.utils.Def;
-import common.utils.SecurityUtils;
 
 public class Player {
 	private PlayerBean bean;
@@ -85,7 +82,6 @@ public class Player {
 			PlayerDao.update(bean);
 			StringBuilder sbLog=new StringBuilder();
 			sbLog.append(log).append("@").append(this.getId()).append("@").append(money).append("@").append(result);
-			LoggerManger.getLogger(Def.MONEY_LOG).info(sbLog.toString());
 		}
 		return result;
 	}

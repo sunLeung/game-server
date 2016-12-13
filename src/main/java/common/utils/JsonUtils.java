@@ -1,12 +1,12 @@
 package common.utils;
 
-import java.io.StringWriter;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import common.log.Logger;
-import common.log.LoggerManger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.StringWriter;
 
 /**
  * 
@@ -16,7 +16,7 @@ import common.log.LoggerManger;
  * @version V1.0
  */
 public class JsonUtils {
-	private static Logger log=LoggerManger.getLogger();
+	private static Logger log= LoggerFactory.getLogger(JsonUtils.class.getName());
 	
 	private static final ObjectMapper mapper = new ObjectMapper();
 	private static final byte[] EMPTY = new byte[0];
