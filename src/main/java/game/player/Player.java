@@ -12,17 +12,18 @@ public class Player {
 	private long updateTime;
 
 	public int getId(){
-		return bean.getId();
+//		return bean.getId();
+		return -1;
 	}
-	
+
 	public String getDeviceid() {
 		return bean.getDeviceid();
 	}
-	
+
 	public String getToken() {
 		return bean.getToken();
 	}
-	
+
 	public PlayerBean getBean() {
 		return bean;
 	}
@@ -46,25 +47,25 @@ public class Player {
 	public void setUpdateTime(long updateTime) {
 		this.updateTime = updateTime;
 	}
-	
+
 	public String getPassword(){
 		String pwd=this.getBean().getPassword();
 		return SecurityUtils.decryptPassword(pwd);
 	}
-	
+
 	public void setPassword(String password){
 		String pwd=SecurityUtils.encryptPassword(password);
 		this.bean.setPassword(pwd);
 	}
-	
+
 	public List<Integer> getSongs(){
 		return this.bean.songs;
 	}
-	
+
 	public AtomicInteger getMoney(){
 		return this.bean.money;
 	}
-	
+
 	public int incMoney(int m,String log){
 		int result=0;
 		synchronized (this.bean) {
@@ -85,7 +86,7 @@ public class Player {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 给用户加歌曲
 	 * @param songid

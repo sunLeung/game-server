@@ -10,9 +10,12 @@ public class Test {
     public static Logger logger = LoggerFactory.getLogger(Test.class);
 
     public static void main(String[] args) {
-        System.out.println(Test.class.getName());
-        System.out.println(Test.class);
-        logger.info("abc");
+        try {
+            String a = null;
+            a.split(",");
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
     }
 
 }

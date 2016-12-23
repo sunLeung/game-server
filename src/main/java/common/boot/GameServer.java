@@ -1,7 +1,6 @@
 package common.boot;
 
 import common.config.Config;
-import common.db.FlushDB;
 import common.net.AdminServer;
 import common.net.HttpProtocolContent;
 import common.net.HttpServer;
@@ -30,12 +29,10 @@ public class GameServer {
 	public static void init(){
 		Config.init();
 		HttpProtocolContent.init();
-		FlushDB.init();
 	}
 	
 	public static void stop(){
 		try {
-			FlushDB.flush();
 			TimerManagerUtils.destroyed();
 			HttpServer.stopHttpServer();
 			AdminServer.stopAdminServer();

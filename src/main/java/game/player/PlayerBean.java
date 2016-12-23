@@ -1,13 +1,12 @@
 package game.player;
 
+import common.utils.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import common.db.Pojo;
-import common.utils.StringUtils;
-
-public class PlayerBean extends Pojo{
+public class PlayerBean {
 	private static final long serialVersionUID = 1L;
 	public String name;
 	public String email;

@@ -94,7 +94,7 @@ public class RegisterAction extends HttpAction{
 			if(id!=-1){
 				Player player=PlayerCache.getPlayer(id);
 				Map<String,Object> r=new HashMap<String, Object>();
-				r.put("id", player.getBean().getId());
+//				r.put("id", player.getBean().getId());
 				r.put("name", player.getBean().getName());
 				r.put("token", player.getBean().getToken());
 				return JsonRespUtils.success(r);

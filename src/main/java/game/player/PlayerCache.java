@@ -41,10 +41,10 @@ public class PlayerCache {
 	 */
 	public static Player initPlayer(PlayerBean bean){
 		Player p=new Player();
-		p.setBean(bean);
-		p.setLoadTime(System.currentTimeMillis());
-		p.setUpdateTime(System.currentTimeMillis());
-		getPlayerCacheContent().put(bean.getId(), p);
+//		p.setBean(bean);
+//		p.setLoadTime(System.currentTimeMillis());
+//		p.setUpdateTime(System.currentTimeMillis());
+//		getPlayerCacheContent().put(bean.getId(), p);
 		return p;
 	}
 }
