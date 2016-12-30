@@ -1,8 +1,8 @@
-package protocol.http;
+package action.http;
 
 import game.player.Player;
 import game.player.PlayerBean;
-import game.player.PlayerCache;
+import cache.PlayerCache;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

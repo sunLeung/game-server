@@ -14,8 +14,8 @@ public class HttpProtocolContent {
 	
 	public static void init() {
 		try {
-			Set<Class<?>> set = AnnoUtils.getClasses("protocol.http");
-			for (Class<?> clz : set) {
+            Set<Class<?>> set = AnnoUtils.getClasses("action.http");
+            for (Class<?> clz : set) {
 				HttpProtocol handler = clz.getAnnotation(HttpProtocol.class);
 				if (handler != null) {
 					int value = handler.value();

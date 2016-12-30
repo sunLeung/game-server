@@ -1,4 +1,4 @@
-package protocol.admin;
+package action.admin;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;

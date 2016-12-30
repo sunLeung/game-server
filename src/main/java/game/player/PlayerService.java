@@ -1,6 +1,7 @@
 package game.player;
 
-import game.dao.PlayerDao;
+import cache.PlayerCache;
+import dao.PlayerDao;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class PlayerService {
 	 */
 	public static boolean authPlayer(int playerid,String deviceid,String token){
 		boolean result=false;
-		Player p=PlayerCache.getPlayer(playerid);
+		Player p = PlayerCache.getPlayer(playerid);
 		if(p!=null&&p.getId()==playerid&&deviceid.equals(p.getDeviceid())&&token.equals(p.getToken())){
 			result=true;
 		}

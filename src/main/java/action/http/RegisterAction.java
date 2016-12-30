@@ -1,9 +1,9 @@
-package protocol.http;
+package action.http;
 
-import game.dao.PlayerDao;
+import dao.PlayerDao;
 import game.player.Player;
 import game.player.PlayerBean;
-import game.player.PlayerCache;
+import cache.PlayerCache;
 
 import java.util.HashMap;
 import java.util.Map;

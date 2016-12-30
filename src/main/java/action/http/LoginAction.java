@@ -1,4 +1,4 @@
-package protocol.http;
+package action.http;
 
 import game.player.Player;
 import game.player.PlayerService;

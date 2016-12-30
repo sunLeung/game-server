@@ -7,8 +7,8 @@ import io.netty.handler.codec.http.FullHttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import protocol.admin.GmAction;
-import protocol.admin.PayAction;
+import action.admin.GmAction;
+import action.admin.PayAction;
 
 import common.config.Config;
 import common.utils.Def;

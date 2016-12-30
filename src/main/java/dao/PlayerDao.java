@@ -1,4 +1,4 @@
-package game.dao;
+package dao;
 
 import game.player.PlayerBean;
 import org.slf4j.Logger;
@@ -93,7 +93,7 @@ public class PlayerDao {
 	 */
 	public static void flushPlayer(){
 		try {
-//			Map<Integer,Player> map=PlayerCache.getPlayerCacheContent();
+//			Map<Integer,Player> map=PlayerCache.getUserCacheContent();
 //			for(Entry<Integer,Player> entry:map.entrySet()){
 //				Player p=entry.getValue();
 //				if(p.getUpdateTime()!=-1){

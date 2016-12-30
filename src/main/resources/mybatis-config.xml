@@ -10,14 +10,14 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url"
-                          value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characherEncoding=UTF-8"/>
-                <property name="username" value="root"/>
-                <property name="password" value=""/>
+                          value="jdbc:mysql://littlenew.iok.la:3306/game?useUnicode=true&amp;characherEncoding=UTF-8"/>
+                <property name="username" value="liang"/>
+                <property name="password" value="liang"/>
             </dataSource>
         </environment>
     </environments>
 
     <mappers>
-        <package name="game.mapper"/>
+        <package name="mapper"/>
     </mappers>
 </configuration>

@@ -1,7 +1,7 @@
 package game.player;
 
 import common.utils.SecurityUtils;
-import game.dao.PlayerDao;
+import dao.PlayerDao;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;

@@ -1,4 +1,4 @@
-package protocol.http;
+package action.http;
 
 import common.net.HttpAction;
 import common.net.HttpPacket;

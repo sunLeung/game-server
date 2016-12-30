@@ -1,4 +1,4 @@
-package game.dao;
+package dao;
 
 public class PayDao {
 
