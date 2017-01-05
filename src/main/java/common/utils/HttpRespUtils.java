@@ -1,6 +1,5 @@
 package common.utils;
 
-import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -12,12 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpRespUtils {
-	
+
 	public static void response(ChannelHandlerContext ctx,String data){
 		FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
 				HttpResponseStatus.OK, Unpooled.copiedBuffer(data, CharsetUtil.UTF_8));
-		response.headers().set(CONTENT_TYPE, "application/json;charset=UTF-8");
-		response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
+		response.headers().set(HttpHeaderNames.CONTENT_TYPE, "application/json;charset=UTF-8");
+		response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
 		response.headers().set(HttpHeaderNames.CONNECTION, "close");
 		response.headers().set(HttpHeaderNames.CONTENT_LENGTH, data.getBytes().length);
 		ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
@@ -30,8 +29,8 @@ public class HttpRespUtils {
 		String data=JsonUtils.encode2Str(map);
 		FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
 				HttpResponseStatus.OK, Unpooled.copiedBuffer(data, CharsetUtil.UTF_8));
-		response.headers().set(CONTENT_TYPE, "application/json;charset=UTF-8");
-		response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
+		response.headers().set(HttpHeaderNames.CONTENT_TYPE, "application/json;charset=UTF-8");
+		response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
 		response.headers().set(HttpHeaderNames.CONNECTION, "close");
 		response.headers().set(HttpHeaderNames.CONTENT_LENGTH, data.getBytes().length);
 		ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
@@ -44,8 +43,8 @@ public class HttpRespUtils {
 		String data=JsonUtils.encode2Str(map);
 		FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
 				HttpResponseStatus.OK, Unpooled.copiedBuffer(data, CharsetUtil.UTF_8));
-		response.headers().set(CONTENT_TYPE, "application/json;charset=UTF-8");
-		response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
+		response.headers().set(HttpHeaderNames.CONTENT_TYPE, "application/json;charset=UTF-8");
+		response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain; charset=UTF-8");
 		response.headers().set(HttpHeaderNames.CONNECTION, "close");
 		response.headers().set(HttpHeaderNames.CONTENT_LENGTH, data.getBytes().length);
 		ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);

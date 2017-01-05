@@ -5,6 +5,7 @@ import common.net.HttpPacket;
 import common.net.HttpProtocol;
 import common.utils.Def;
 import common.utils.JsonRespUtils;
+import service.UserService;
 
 @HttpProtocol(Def.PROTOCOL_UPDATE_PLAYER)
 public class UpdatePlayerAction extends HttpAction {
@@ -14,7 +15,7 @@ public class UpdatePlayerAction extends HttpAction {
 		try {
 			String data = packet.getData();
 
-			if (PlayerService.updatePlayer(packet.getUserId(), data)) {
+			if (UserService.updatePlayer(packet.getUserId(), data)) {
 				return JsonRespUtils.success("Update success");
 			}
 

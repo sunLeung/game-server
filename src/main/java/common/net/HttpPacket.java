@@ -5,7 +5,6 @@ import io.netty.handler.codec.http.HttpRequest;
 
 public class HttpPacket {
     private long userId;
-    private String deviceid;
     private String token;
     private int protocol;
     private String data;
@@ -14,7 +13,6 @@ public class HttpPacket {
 
     public HttpPacket(long userId, String token, int protocol, String data, String ip, HttpRequest request) {
         this.userId = userId;
-        this.deviceid = deviceid;
         this.token = token;
         this.protocol = protocol;
         this.data = data;
@@ -28,14 +26,6 @@ public class HttpPacket {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public String getDeviceid() {
-        return deviceid;
-    }
-
-    public void setDeviceid(String deviceid) {
-        this.deviceid = deviceid;
     }
 
     public String getToken() {

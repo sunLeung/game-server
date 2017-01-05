@@ -65,21 +65,20 @@ public class UserService {
     /**
      * 第三方渠道登陆
      *
-     * @param deviceid
      * @param data
      * @return
      */
-    public static User thirdPartylogin(String deviceid, String ip, String data) {
+    public static User thirdPartylogin(String ip, String data) {
         User user = null;
         JsonNode jsonData = JsonUtils.decode(data);
         String unionid = JsonUtils.getString("unionid", jsonData);
         if ("1".equals(unionid)) {//微信登陆
-            user = weixinLogin(jsonData, deviceid);
+            user = weixinLogin(jsonData);
         }
         return user;
     }
 
-    public static User weixinLogin(JsonNode jsonData, String deviceid) {
+    public static User weixinLogin(JsonNode jsonData) {
         User user = null;
         JsonNode identity = jsonData.get("identity");
         String openid = identity.get("openid").asText();
@@ -136,7 +135,7 @@ public class UserService {
         return user;
     }
 
-//    public static boolean updatePlayer(int playerid, String data) {
+    public static boolean updatePlayer(long playerid, String data) {
 //        JsonNode jsonData = JsonUtils.decode(data);
 //        Player p = UserContent.getPlayer(playerid);
 //        if (p != null) {
@@ -151,7 +150,7 @@ public class UserService {
 //                return true;
 //            }
 //        }
-//        return false;
-//    }
+        return false;
+    }
 
 }

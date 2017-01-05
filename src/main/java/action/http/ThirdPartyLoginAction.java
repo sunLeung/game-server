@@ -5,6 +5,8 @@ import common.net.HttpPacket;
 import common.net.HttpProtocol;
 import common.utils.Def;
 import common.utils.JsonRespUtils;
+import pojo.User;
+import service.UserService;
 
 @HttpProtocol(Def.PROTOCOL_THIRDPARTY_LOGIN)
 public class ThirdPartyLoginAction extends HttpAction {
@@ -13,9 +15,9 @@ public class ThirdPartyLoginAction extends HttpAction {
 	public String excute(HttpPacket packet) {
 		try {
 			String data = packet.getData();
-			Player p = PlayerService.thirdPartylogin(packet.getDeviceid(),packet.getIp(), data);
-			if (p != null) {
-				return JsonRespUtils.success(p.getBean());
+			User user = UserService.thirdPartylogin(packet.getIp(), data);
+			if (user != null) {
+				return JsonRespUtils.success(user);
 			}
 
 		} catch (Exception e) {

@@ -33,7 +33,7 @@ public class AdminServerHandler extends ChannelInboundHandlerAdapter {
 				}
 				String security=request.headers().get("security");
 				if(Config.SECURITY.equals(security)){
-					String uri=request.getUri();
+					String uri=request.uri();
 					String path="";
 					int index = uri.indexOf('/', 1);
 					if (index == -1) {

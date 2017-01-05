@@ -14,7 +14,6 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.util.CharsetUtil;
 import service.UserService;
 
-import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 public class HttpServerHandler extends ChannelInboundHandlerAdapter {
@@ -42,7 +41,7 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
 				if(result==null)result="";
 				FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
 						HttpResponseStatus.OK, Unpooled.copiedBuffer(result, CharsetUtil.UTF_8));
-				response.headers().set(CONTENT_TYPE, "application/json;charset=UTF-8");
+				response.headers().set(HttpHeaderNames.CONTENT_TYPE, "application/json;charset=UTF-8");
 				response.headers().set(HttpHeaderNames.CONNECTION, "close");
 				response.headers().set(HttpHeaderNames.CONTENT_LENGTH, result.getBytes().length);
 				ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);

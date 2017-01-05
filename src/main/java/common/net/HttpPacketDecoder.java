@@ -42,7 +42,7 @@ public class HttpPacketDecoder extends MessageToMessageDecoder<FullHttpRequest> 
 				InetSocketAddress inetSocketAddress = (InetSocketAddress) remoteAddress;
 				ip=inetSocketAddress.getAddress().getHostAddress();
 			}
-			HttpPacket packet = new HttpPacket(playerid,deviceid,token,protocol,data,ip,msg);
+			HttpPacket packet = new HttpPacket(playerid,token,protocol,data,ip,msg);
 			out.add(packet);
 			
 			if(GameServer.isTrace){
