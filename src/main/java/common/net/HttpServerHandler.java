@@ -1,31 +1,35 @@
 package common.net;
 
-import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
-import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
-import game.player.PlayerService;
+import common.utils.Def;
+import common.utils.HttpRespUtils;
+import common.utils.StringUtils;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.HttpHeaderNames;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.util.CharsetUtil;
-import common.utils.Def;
-import common.utils.HttpRespUtils;
-import common.utils.StringUtils;
+import service.UserService;
+
+import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
+import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 public class HttpServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg){
 		if(msg instanceof  HttpPacket){
 			HttpPacket packet=(HttpPacket)msg;
-			if(StringUtils.isBlank(packet.getDeviceid())){
-				HttpRespUtils.responseFail(ctx, Def.CODE_LOGIN_FAIL,"Deviceid must not be null.");
-				return;
-			}
+//			if(StringUtils.isBlank(packet.getDeviceid())){
+//				HttpRespUtils.responseFail(ctx, Def.CODE_LOGIN_FAIL,"Deviceid must not be null.");
+//				return;
+//			}
 			int protocol=packet.getProtocol();
 			if(protocol>=0x0a){
 				//验证玩家是否已经登录
-				if(StringUtils.isBlank(packet.getToken())||!PlayerService.authPlayer(packet.getPlayerid(), packet.getDeviceid(), packet.getToken())){
+				if(StringUtils.isBlank(packet.getToken())||!UserService.isLogin(packet.getUserId(),  packet.getToken())){
 					HttpRespUtils.responseFail(ctx, Def.CODE_LOGIN_FAIL,"Verify login authentication fail,please login again.");
 					return;
 				}

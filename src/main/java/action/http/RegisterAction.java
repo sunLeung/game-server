@@ -1,9 +1,7 @@
 package action.http;
 
-import dao.PlayerDao;
-import game.player.Player;
-import game.player.PlayerBean;
-import cache.PlayerCache;
+import dao.UserDao;
+import cache.UserContent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +18,7 @@ import common.utils.JsonRespUtils;
 import common.utils.JsonUtils;
 import common.utils.SecurityUtils;
 import common.utils.StringUtils;
+import pojo.User;
 
 @HttpProtocol(Def.PROTOCOL_REGISTER)
 public class RegisterAction extends HttpAction{
@@ -63,40 +62,32 @@ public class RegisterAction extends HttpAction{
 					return JsonRespUtils.fail(Def.CODE_REGISTER_FAIL, "Email parameter is wrong.");
 				}
 			}
-			PlayerBean p=PlayerDao.loadByName(name);
-			if(p!=null){
-				return JsonRespUtils.fail(Def.CODE_REGISTER_FAIL, "Name has been registered.");
-			}
 			
-			p=PlayerDao.loadByPhone(phone);
-			if(p!=null){
+			User u= UserDao.loadByPhone(phone);
+			if(u!=null){
 				return JsonRespUtils.fail(Def.CODE_REGISTER_FAIL, "Phone has been registered.");
 			}
 			
-			p=PlayerDao.loadByEmail(email);
-			if(p!=null){
+			u=UserDao.loadByEmail(email);
+			if(u!=null){
 				return JsonRespUtils.fail(Def.CODE_REGISTER_FAIL, "Email has been registered.");
 			}
 			
-			PlayerBean bean=new PlayerBean();
-			bean.setDeviceid(packet.getDeviceid());
-			bean.setEmail(email);
-			bean.setName(name);
-			bean.setPassword(SecurityUtils.encryptPassword(password1));
-			bean.setSecret(SecurityUtils.createUUIDString());
-			bean.setPhone(phone);
-			bean.setSex(sex);
-			bean.setToken(SecurityUtils.createUUIDString());
-			
-			bean.setMoney(300);
-			
-			int id=PlayerDao.save(bean);
+			User user=new User();
+			user.setEmail(email);
+			user.setName(name);
+			user.setPassword(SecurityUtils.encryptPassword(password1));
+			user.setPhone(phone);
+			user.setSex(sex);
+			user.setToken(SecurityUtils.createUUIDString());
+
+			long id=UserDao.save(user);
 			if(id!=-1){
-				Player player=PlayerCache.getPlayer(id);
+				User user1= UserContent.getUser(id);
 				Map<String,Object> r=new HashMap<String, Object>();
-//				r.put("id", player.getBean().getId());
-				r.put("name", player.getBean().getName());
-				r.put("token", player.getBean().getToken());
+				r.put("id", user1.getId());
+				r.put("name", user1.getName());
+				r.put("token", user1.getToken());
 				return JsonRespUtils.success(r);
 			}
 			return JsonRespUtils.fail(Def.CODE_REGISTER_FAIL, "Create player fail.");

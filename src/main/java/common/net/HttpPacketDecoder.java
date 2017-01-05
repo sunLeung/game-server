@@ -24,10 +24,9 @@ public class HttpPacketDecoder extends MessageToMessageDecoder<FullHttpRequest> 
 				return;
 			}
 			
-			String deviceid=msg.headers().get("deviceid");
 			String token=msg.headers().get("token");
 			String protocolStr=msg.headers().get("protocol");
-			String playeridStr=msg.headers().get("playerid");
+			String useridStr=msg.headers().get("userid");
 			
 			logger.debug("Received protocol "+protocolStr);
 			
@@ -35,8 +34,8 @@ public class HttpPacketDecoder extends MessageToMessageDecoder<FullHttpRequest> 
 			String data = msg.content().toString(CharsetUtil.UTF_8);
 			
 			int playerid=-1;
-			if(StringUtils.isNotBlank(playeridStr))
-				playerid=Integer.valueOf(playeridStr.trim());
+			if(StringUtils.isNotBlank(useridStr))
+				playerid=Integer.valueOf(useridStr.trim());
 			SocketAddress remoteAddress = ctx.channel().remoteAddress();
 			String ip="";
 			if(remoteAddress!=null){

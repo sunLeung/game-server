@@ -1,8 +1,5 @@
 package action.http;
 
-import game.player.Player;
-import game.player.PlayerService;
-
 import common.net.HttpAction;
 import common.net.HttpPacket;
 import common.net.HttpProtocol;

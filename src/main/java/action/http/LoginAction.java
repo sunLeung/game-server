@@ -1,10 +1,6 @@
 package action.http;
 
-import game.player.Player;
-import game.player.PlayerService;
-
 import com.fasterxml.jackson.databind.JsonNode;
-
 import common.net.HttpAction;
 import common.net.HttpPacket;
 import common.net.HttpProtocol;
@@ -12,6 +8,8 @@ import common.utils.Def;
 import common.utils.JsonRespUtils;
 import common.utils.JsonUtils;
 import common.utils.StringUtils;
+import pojo.User;
+import service.UserService;
 
 @HttpProtocol(Def.PROTOCOL_LOGIN)
 public class LoginAction extends HttpAction{
@@ -24,9 +22,9 @@ public class LoginAction extends HttpAction{
 			String identity = JsonUtils.getString("identity", node);
 			String password = JsonUtils.getString("password",node);
 			if(StringUtils.isNotBlank(identity)&&StringUtils.isNotBlank(password)){
-				Player p=PlayerService.login(identity, password, packet.getDeviceid());
-				if(p!=null){
-					return JsonRespUtils.success(p.getBean());
+				User user= UserService.login(identity, password);
+				if(user!=null){
+					return JsonRespUtils.success(user);
 				}
 			}
 			

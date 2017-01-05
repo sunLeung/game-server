@@ -1,9 +1,11 @@
-package dao;
+package mapper;
 
 import pojo.User;
 
 /**
- * Created by uc on 2016/12/29.
+ * @Description:
+ * @author: leungyuxin
+ * @date: 2017/1/2
  */
 public interface UserMapper {
     User selectUserById(long id);
@@ -11,4 +13,6 @@ public interface UserMapper {
     User selectUserByEmail(String email);
 
     User selectUserByPhone(String phone);
+
+    long insertUser(User user);
 }

@@ -1,7 +1,5 @@
 package action.http;
 
-import game.player.PlayerService;
-
 import common.net.HttpAction;
 import common.net.HttpPacket;
 import common.net.HttpProtocol;
@@ -16,7 +14,7 @@ public class UpdatePlayerAction extends HttpAction {
 		try {
 			String data = packet.getData();
 
-			if (PlayerService.updatePlayer(packet.getPlayerid(), data)) {
+			if (PlayerService.updatePlayer(packet.getUserId(), data)) {
 				return JsonRespUtils.success("Update success");
 			}
 
