@@ -7,8 +7,8 @@ import io.netty.handler.codec.http.FullHttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import protocol.admin.GmAction;
-import protocol.admin.PayAction;
+import action.admin.GmAction;
+import action.admin.PayAction;
 
 import common.config.Config;
 import common.utils.Def;
@@ -33,7 +33,7 @@ public class AdminServerHandler extends ChannelInboundHandlerAdapter {
 				}
 				String security=request.headers().get("security");
 				if(Config.SECURITY.equals(security)){
-					String uri=request.getUri();
+					String uri=request.uri();
 					String path="";
 					int index = uri.indexOf('/', 1);
 					if (index == -1) {

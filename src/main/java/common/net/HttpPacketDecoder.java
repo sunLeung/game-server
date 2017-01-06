@@ -1,22 +1,21 @@
 package common.net;
 
+import common.boot.GameServer;
+import common.utils.StringUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.List;
 import java.util.Set;
 
-import common.boot.GameServer;
-import common.log.Logger;
-import common.log.LoggerManger;
-import common.utils.StringUtils;
-
 public class HttpPacketDecoder extends MessageToMessageDecoder<FullHttpRequest> {
-	private static Logger logger=LoggerManger.getLogger();
+	private static Logger logger= LoggerFactory.getLogger(HttpPacketDecoder.class.getName());
 	@Override
 	protected void decode(ChannelHandlerContext ctx, FullHttpRequest msg, List<Object> out){
 		try {
@@ -25,10 +24,9 @@ public class HttpPacketDecoder extends MessageToMessageDecoder<FullHttpRequest> 
 				return;
 			}
 			
-			String deviceid=msg.headers().get("deviceid");
 			String token=msg.headers().get("token");
 			String protocolStr=msg.headers().get("protocol");
-			String playeridStr=msg.headers().get("playerid");
+			String useridStr=msg.headers().get("userid");
 			
 			logger.debug("Received protocol "+protocolStr);
 			
@@ -36,15 +34,15 @@ public class HttpPacketDecoder extends MessageToMessageDecoder<FullHttpRequest> 
 			String data = msg.content().toString(CharsetUtil.UTF_8);
 			
 			int playerid=-1;
-			if(StringUtils.isNotBlank(playeridStr))
-				playerid=Integer.valueOf(playeridStr.trim());
+			if(StringUtils.isNotBlank(useridStr))
+				playerid=Integer.valueOf(useridStr.trim());
 			SocketAddress remoteAddress = ctx.channel().remoteAddress();
 			String ip="";
 			if(remoteAddress!=null){
 				InetSocketAddress inetSocketAddress = (InetSocketAddress) remoteAddress;
 				ip=inetSocketAddress.getAddress().getHostAddress();
 			}
-			HttpPacket packet = new HttpPacket(playerid,deviceid,token,protocol,data,ip,msg);
+			HttpPacket packet = new HttpPacket(playerid,token,protocol,data,ip,msg);
 			out.add(packet);
 			
 			if(GameServer.isTrace){

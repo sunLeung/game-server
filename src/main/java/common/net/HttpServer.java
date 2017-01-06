@@ -1,5 +1,6 @@
 package common.net;
 
+import common.boot.GameServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -11,15 +12,13 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 
-import common.boot.GameServer;
-import common.log.Logger;
-import common.log.LoggerManger;
-
 public class HttpServer {
-	private static Logger logger=LoggerManger.getLogger();
+	private static Logger logger= LoggerFactory.getLogger(HttpServer.class.getName());
 	private static ChannelFuture future;
 	private static EventLoopGroup bossGroup = new NioEventLoopGroup(1);;
 	private static EventLoopGroup workerGroup = new NioEventLoopGroup();;
